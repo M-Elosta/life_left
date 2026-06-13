@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Life in Weeks</title>
+  <meta name="description" content="See your whole life on one screen. Every box is a week — the filled ones are already gone. What are you waiting for?" />
+
+  <!-- Social sharing -->
+  <meta property="og:title" content="Your Life in Weeks" />
+  <meta property="og:description" content="Every box is a week of your life. The filled ones are gone. What are you waiting for?" />
+  <meta property="og:type" content="website" />
+
+  <!-- Inline hourglass favicon (no extra request) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%8F%B3</text></svg>" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Your Life <span class="accent">in Weeks</span></h1>
+      <p class="subtitle">Every box below is one week of your life. The filled ones are already spent.</p>
+    </header>
+
+    <section class="controls" aria-label="Settings">
+      <div class="field">
+        <label for="dob">Date of birth</label>
+        <input type="date" id="dob" autocomplete="bday" />
+      </div>
+      <div class="field">
+        <label for="age">Life expectancy (years)</label>
+        <input type="number" id="age" min="1" max="150" step="1" value="70" inputmode="numeric" />
+      </div>
+    </section>
+
+    <section class="stats" id="stats" aria-live="polite">
+      <!-- stat cards injected by script.js -->
+    </section>
+
+    <section class="progress" aria-label="Life progress">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">0%</div>
+    </section>
+
+    <section class="grid-section">
+      <div class="legend">
+        <span class="legend-item"><span class="swatch lived"></span>Lived</span>
+        <span class="legend-item"><span class="swatch current"></span>This week</span>
+        <span class="legend-item"><span class="swatch future"></span>Yet to come</span>
+      </div>
+      <p class="hint" id="hint">Enter your date of birth to fill in the weeks you've already lived.</p>
+      <div class="grid" id="grid" role="img" aria-label="A grid where each box represents one week of your life"></div>
+    </section>
+
+    <footer class="footer">
+      <p class="prompt" id="prompt">What are you waiting for?</p>
+      <p class="credit">Inspired by the idea that a life is just a handful of weeks. Spend them well.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

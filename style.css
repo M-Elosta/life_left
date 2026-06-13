@@ -1,0 +1,243 @@
+:root {
+  --bg: #0c0e13;
+  --panel: #161a23;
+  --panel-2: #1e222d;
+  --text: #e9ebf2;
+  --muted: #8b92a6;
+  --border: #262b38;
+
+  --lived: #e8a33d;          /* gold — time already spent */
+  --lived-2: #f0b85e;
+  --current: #ff5a5a;        /* this week */
+  --future: #232838;         /* weeks yet to come */
+  --accent: #f0b85e;
+
+  --gap: clamp(2px, 0.45vw, 4px);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #171b27 0%, var(--bg) 55%) no-repeat,
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 4vw, 2rem) 3rem;
+}
+
+/* ---------- Header ---------- */
+.header { text-align: center; margin-bottom: 2rem; }
+
+.header h1 {
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  line-height: 1.05;
+}
+.accent {
+  background: linear-gradient(120deg, var(--lived), var(--lived-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+}
+
+/* ---------- Controls ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+.field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.field input {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 0.7rem 0.85rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(240, 184, 94, 0.18);
+}
+/* Make the native date-picker icon visible on dark backgrounds */
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.8); cursor: pointer; }
+
+/* ---------- Stats ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 0.75rem;
+  text-align: center;
+}
+.stat-value {
+  font-size: clamp(1.3rem, 4.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.stat-value.gold { color: var(--lived); }
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.3rem;
+}
+@media (max-width: 480px) {
+  .stat-label { font-size: 0.66rem; }
+}
+
+/* ---------- Progress bar ---------- */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+.progress-track {
+  flex: 1;
+  height: 14px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lived), var(--lived-2));
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.progress-label {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-width: 3.5ch;
+  text-align: right;
+  color: var(--lived);
+}
+
+/* ---------- Legend ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.legend-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+.swatch {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.swatch.lived { background: var(--lived); }
+.swatch.current { background: var(--current); }
+.swatch.future { background: var(--future); border: 1px solid var(--border); }
+
+.hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+  min-height: 1.2em;
+}
+.hint.warn { color: var(--current); }
+
+/* ---------- The grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: var(--gap);
+}
+.cell {
+  aspect-ratio: 1 / 1;
+  background: var(--future);
+  border-radius: 2px;
+}
+.cell.lived {
+  background: var(--lived);
+}
+.cell.current {
+  background: var(--current);
+  box-shadow: 0 0 0 1px var(--current), 0 0 8px 1px rgba(255, 90, 90, 0.7);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cell.current { animation: none; }
+  .progress-fill { transition: none; }
+}
+
+/* ---------- Footer ---------- */
+.footer { text-align: center; margin-top: 2.75rem; }
+.prompt {
+  font-size: clamp(1.4rem, 5vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+  background: linear-gradient(120deg, var(--lived), var(--current));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.prompt strong { -webkit-text-fill-color: initial; color: var(--lived); }
+.credit {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+  max-width: 40ch;
+  margin-inline: auto;
+}
